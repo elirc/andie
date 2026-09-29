@@ -1,0 +1,52 @@
+{
+  "formatVersion": 1,
+  "apiVersion": "2026-07",
+  "store": "source-learning",
+  "definitions": [
+    {
+      "type": "size_guide",
+      "name": "Size guide",
+      "description": "Local fixture for migration practice",
+      "displayNameKey": "title",
+      "access": {
+        "storefront": "PUBLIC_READ"
+      },
+      "capabilities": {
+        "publishable": {
+          "enabled": true
+        },
+        "translatable": {
+          "enabled": false
+        }
+      },
+      "fieldDefinitions": [
+        {
+          "key": "title",
+          "name": "Title",
+          "required": true,
+          "type": {
+            "name": "single_line_text_field"
+          },
+          "validations": []
+        }
+      ],
+      "metaobjects": [
+        {
+          "handle": "general",
+          "capabilities": {
+            "publishable": {
+              "status": "DRAFT"
+            }
+          },
+          "fields": [
+            {
+              "key": "title",
+              "value": "Find your fit",
+              "type": "single_line_text_field"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

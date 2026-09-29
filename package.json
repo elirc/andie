@@ -1,0 +1,16 @@
+{
+  "name": "andie-metaobject-learning-lab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Offline-first Shopify metaobject migration learning utility",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "plan:example": "node scripts/populate-metaobjects.js plan --source fixtures/source.json --target fixtures/target.json --out plan.example.json",
+    "check": "node --check scripts/populate-metaobjects.js && node --check scripts/lib/client.js && node --check scripts/lib/planner.js",
+    "format:check": "npx prettier --check \"scripts/**/*.js\" \"test/**/*.js\"",
+    "format": "npx prettier --write \"scripts/**/*.js\" \"test/**/*.js\""
+  }
+}
