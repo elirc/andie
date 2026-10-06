@@ -1,6 +1,6 @@
 # What was actually verified
 
-Final local verification passed 42 Node tests and three JavaScript syntax checks under Node 22.16.0. There are no third-party package dependencies. `npm test` reproduces the test suite and `npm run check` checks the three implementation files. The central improvement workspace records TAP output, result JSON and the finite delivery manifest.
+Final local verification passed 43 Node tests (`npm test` reports `# pass 43`) and three JavaScript syntax checks under Node 22.16.0. There are no third-party package dependencies. `npm test` reproduces the test suite and `npm run check` checks the three implementation files. The central improvement workspace records TAP output, result JSON and the finite delivery manifest.
 
 Tests cover deterministic plans, immutable source inputs, missing and unchanged resources, existing-value and schema conflicts, duplicate identities, required values, reference fields, ownership boundaries, output-to-input admin access mapping and unsupported capabilities. Cursor cases verify variable binding, repeated-cursor rejection and a finite page bound. Selected read failures retry within limits; mutation failures do not retry automatically. GraphQL errors, mutation userErrors and missing IDs cannot be recorded as success.
 

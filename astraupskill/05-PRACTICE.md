@@ -1,5 +1,24 @@
 # Progressive integration and CRUD exercises
 
+## 0. Warm-ups against the code as it is
+
+Everything here runs offline with plain Node (the suite is `node --test`, no install). Do these before the extension work below; each has an exact expected observation.
+
+0a. **Predict the plan.** Read `fixtures/source.json` and `fixtures/target.json` (the target is an empty store), predict the operation counts, then run
+    `npm run plan:example` (or point `--out` at a temp path).
+    **Check**: the CLI prints `Plan written: 2 proposed creates, 0 conflicts, 0 unchanged. No network requests.` and the JSON's `operations` array holds one `createDefinition` and one `createEntry` — in that order. Say why that order is not optional.
+
+0b. **Force every plan category.** Copy both fixtures to a temp dir and edit the *copy* of the target so that, across three runs, you produce: an `unchanged` entry (same handle, same value as the source's `general`), a conflict (same handle, different `title` value), and a `targetOnly` entry (a handle the source lacks).
+    **Check**: the printed counts move from `2/0/0` to the distribution you predicted for each edit, and the plan file's `conflicts` / `unchanged` / `targetOnly` arrays name the handles you touched. Note which edits also change `targetHash` — and therefore what `applyPlan`'s re-export comparison would catch.
+
+0c. **Watch a guard fail: exclusive creation.** Run the same plan command twice with the same `--out` path.
+    **Check**: the second run prints `Output already exists; choose a new path.` and exits 1, and the file's content is byte-identical to the first run (hash it). Then find the single line in `scripts/populate-metaobjects.js` (`newOutput`) that makes this happen.
+
+0d. **Watch a validator fail: duplicate field key.** In a temp copy of `source.json`, duplicate the `title` field definition and run a plan against it.
+    **Check**: the run fails with `Duplicate field key.` and no output file is created — validation happens in `normalizeSnapshot` before any plan is written. State which other validations in `scripts/lib/planner.js` you could trigger the same way (there are at least five).
+
+## Extensions: future learning work
+
 These features are future learning work. The delivered utility already provides offline planning, selected read exports and explicit creates. Build each extension with a user story, a rule for conflicts and a test for a late failure.
 
 ## 1. Improve the review artifact
